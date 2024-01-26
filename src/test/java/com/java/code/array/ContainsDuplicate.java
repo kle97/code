@@ -39,15 +39,17 @@ public class ContainsDuplicate extends BaseTest {
     @DataProvider(name = "ContainsDuplicate")
     public Object[][] data() {
         return new Object[][] {
-                {true, new int[]{1,2,3,1}},
-                {false, new int[]{1,2,3,4}},
-                {true, new int[]{1,1,1,3,3,4,3,2,4,2}},
+                {new int[]{1,2,3,1}, true},
+                {new int[]{1,2,3,4}, false},
+                {new int[]{1,1,1,3,3,4,3,2,4,2}, true},
         };
     }
     
     @Test(dataProvider = "ContainsDuplicate")
-    public void containsDuplicateTest(boolean expected, int[] nums) {
-        softAssert.assertEquals(containsDuplicate(nums), expected, Arrays.toString(nums));
+    public void test(int[] nums, boolean expected) {
+        softAssert.as(Arrays.toString(nums))
+                  .assertThat(containsDuplicate(nums))
+                  .isEqualTo(expected);
     }
     
     public boolean containsDuplicate(int[] nums) {
