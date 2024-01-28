@@ -46,7 +46,7 @@ import java.util.Arrays;
  */
 public class ReplaceElementsWithGreatestElementOnRightSide extends BaseTest {
 
-    @DataProvider(name = "ConcatenationOfArray")
+    @DataProvider(name = "ReplaceElementsWithGreatestElementOnRightSide")
     public Object[][] data() {
         return new Object[][]{
                 {new int[]{17,18,5,4,6,1}, new int[]{18,6,6,6,1,-1}},
@@ -54,7 +54,7 @@ public class ReplaceElementsWithGreatestElementOnRightSide extends BaseTest {
         };
     }
 
-    @Test(dataProvider = "ConcatenationOfArray")
+    @Test(dataProvider = "ReplaceElementsWithGreatestElementOnRightSide")
     public void test(int[] nums, int[] expected) {
         softAssert.as(Arrays.toString(nums))
                   .assertThat(replaceElements(nums))
@@ -62,6 +62,17 @@ public class ReplaceElementsWithGreatestElementOnRightSide extends BaseTest {
     }
 
     public int[] replaceElements(int[] arr) {
-        return new int[0];
+        for (int i = 0; i < arr.length - 1; i++) {
+            int max = arr[i + 1];
+            for (int j = arr.length - 1; j >= i + 2 ; j--) {
+                if (arr[j] > max) {
+                    max = arr[j];
+                }
+            }
+            arr[i] = max;
+        }
+        
+        arr[arr.length - 1] = -1;
+        return arr;
     }
 }
