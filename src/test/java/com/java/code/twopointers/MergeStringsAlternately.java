@@ -1,4 +1,4 @@
-package com.java.code.array;
+package com.java.code.twopointers;
 
 import com.java.code.common.BaseTest;
 import org.testng.annotations.DataProvider;

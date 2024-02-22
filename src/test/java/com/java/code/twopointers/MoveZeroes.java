@@ -1,4 +1,4 @@
-package com.java.code.array;
+package com.java.code.twopointers;
 
 /**
  <p>Given an integer array <code>nums</code>, move all <code>0</code>'s to the end of it while maintaining the relative order of the non-zero elements.</p>
