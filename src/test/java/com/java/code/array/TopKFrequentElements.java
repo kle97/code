@@ -7,6 +7,7 @@ import org.testng.annotations.Test;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  <p>Given an integer array <code>nums</code> and an integer <code>k</code>, return <em>the</em> <code>k</code> <em>most frequent elements</em>. You may return the answer in <strong>any order</strong>.</p>
@@ -48,8 +49,8 @@ public class TopKFrequentElements extends BaseTest {
     @Test(dataProvider = "data")
     public void test(int[] nums, int k, int[] expected) {
         softAssert.as(String.format("nums = %s, k = %d", Arrays.toString(nums), k))
-                  .assertThat(Arrays.stream(topKFrequent(nums, k)).boxed().toList())
-                  .isEqualNoOrder(Arrays.stream(expected).boxed().toList());
+                  .assertThat(Arrays.stream(topKFrequent(nums, k)).boxed().collect(Collectors.toList()))
+                  .isEqualNoOrder(Arrays.stream(expected).boxed().collect(Collectors.toList()));
     }
 
     public int[] topKFrequent(int[] nums, int k) {
@@ -61,7 +62,7 @@ public class TopKFrequentElements extends BaseTest {
         }
         
         int i = 0;
-        for (Map.Entry<Integer, Integer> entry : map.entrySet().stream().sorted(Map.Entry.comparingByValue((a,b) -> b - a)).toList()) {
+        for (Map.Entry<Integer, Integer> entry : map.entrySet().stream().sorted(Map.Entry.comparingByValue((a,b) -> b - a)).collect(Collectors.toList())) {
             ans[i] = entry.getKey();
             i++;
             if (i >= k) {

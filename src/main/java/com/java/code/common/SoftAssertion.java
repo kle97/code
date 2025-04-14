@@ -28,6 +28,10 @@ public class SoftAssertion extends SoftAssert {
     }
     
     private <T> String objectToString(T object) {
+        if (object == null) {
+            return null;
+        }
+
         String result;
         Class<?> objectClass = object.getClass();
         if (objectClass.isArray()) {
