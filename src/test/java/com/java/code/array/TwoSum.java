@@ -4,9 +4,7 @@ import com.java.code.common.BaseTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  <p>Given an array of integers <code>nums</code>&nbsp;and an integer <code>target</code>, return <em>indices of the two numbers such that they add up to <code>target</code></em>.</p>
@@ -74,22 +72,30 @@ public class TwoSum extends BaseTest {
     }
 
     public int[] twoSum(int[] nums, int target) {
-        Map<Integer, Integer> map = new HashMap<>();
-
+        Map<Integer, List<Integer>> map = new HashMap<>();
         for (int i = 0; i < nums.length; i++) {
-            map.put(nums[i], i);
+            int num = nums[i];
+            List<Integer> list;
+            if (!map.containsKey(num)) {
+                list = new ArrayList<>();
+            } else {
+                list = map.get(num);
+            }
+            list.add(i);
+            map.put(num, list);
         }
 
         for (int i = 0; i < nums.length; i++) {
-            int key = target - nums[i];
-            if (map.containsKey(key)) {
-                int value = map.get(key);
-                if (map.get(key) != i) {
-                    return new int[] {i, value};
+            int num = nums[i];
+            if (map.containsKey(target - num)) {
+                List<Integer> list = map.get(target - num);
+                for (int j = 0; j < list.size(); j++) {
+                    if (list.get(j) != i)  {
+                        return new int[] {i, list.get(j)};
+                    }
                 }
             }
         }
-        
         return new int[0];
     }
 }

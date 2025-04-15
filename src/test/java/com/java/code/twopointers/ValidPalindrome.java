@@ -55,6 +55,7 @@ public class ValidPalindrome extends BaseTest {
                 {"race a car", false},
                 {" ", true},
                 {"a", true},
+                {"aa", true},
                 {".,", true},
                 {"0P", false},
         };
@@ -68,28 +69,20 @@ public class ValidPalindrome extends BaseTest {
     }
     
     public boolean isPalindrome(String s) {
+        s = s.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+        if (s.isEmpty()) {
+            return true;
+        }
+
         int i = 0;
         int j = s.length() - 1;
         while (i < j) {
-            char ch1 = s.charAt(i);
-            while (i < j && (ch1 < 97 || ch1 > 122) && (ch1 < 65 || ch1 > 90) && (ch1 < 48 || ch1 > 57)) {
-                i++;
-                ch1 = s.charAt(i);
-            }
-            
-            char ch2 = s.charAt(j);
-            while (i < j && (ch2 < 97 || ch2 > 122) && (ch2 < 65 || ch2 > 90) && (ch2 < 48 || ch2 > 57)) {
-                j--;
-                ch2 = s.charAt(j);
-            }
-            
-            if(Character.toLowerCase(ch1) != Character.toLowerCase(ch2)) {
+            if (s.charAt(i) != s.charAt(j)) {
                 return false;
             }
             i++;
             j--;
         }
-        
         return true;
     }
 }

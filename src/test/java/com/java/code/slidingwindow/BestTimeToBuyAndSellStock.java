@@ -48,6 +48,7 @@ public class BestTimeToBuyAndSellStock extends BaseTest {
         return new Object[][]{
                 {new int[] {7,1,5,3,6,4}, 5},
                 {new int[] {7,6,4,3,1}, 0},
+                {new int[] {2,1,4}, 3},
         };
     }
 
@@ -60,19 +61,11 @@ public class BestTimeToBuyAndSellStock extends BaseTest {
 
     public int maxProfit(int[] prices) {
         int maxProfit = 0;
-        int lowestPrice = Integer.MAX_VALUE;
-        int lowestPriceIndex = 0;
-        for (int i = 0; i < prices.length; i++) {
-            if (prices[i] < lowestPrice) {
-                lowestPrice = prices[i];
-                lowestPriceIndex = i;
-            }
-
-            if (i > lowestPriceIndex) {
-                maxProfit = Math.max(maxProfit, prices[i] - lowestPrice);
-            }
+        int lowest = prices[0];
+        for (int i = 1; i < prices.length; i++) {
+            maxProfit = Math.max(maxProfit, prices[i] - lowest);
+            lowest = Math.min(lowest, prices[i]);
         }
-
         return maxProfit;
     }
 }

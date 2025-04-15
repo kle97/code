@@ -19,31 +19,31 @@ public class ReverseLinkedList extends BaseTest {
                 };
     }
 
-    @Test(dataProvider = "data")
-    public void test(ListNode head, ListNode expected) {
-        softAssert.as(String.format("nums = %s, target = %d", Arrays.toString(nums), target))
-                  .assertThat(reverseList(head))
-                  .isEqualTo(expected);
-    }
-
-    public ListNode reverseList(ListNode head) {
-
-    }
-
-    public class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode() {
-        }
-
-        ListNode(int val) {
-            this.val = val;
-        }
-
-        ListNode(int val, ListNode next) {
-            this.val = val;
-            this.next = next;
-        }
-    }
+//    @Test(dataProvider = "data")
+//    public void test(ListNode head, ListNode expected) {
+//        softAssert.as(String.format("nums = %s, target = %d", Arrays.toString(nums), target))
+//                  .assertThat(reverseList(head))
+//                  .isEqualTo(expected);
+//    }
+//
+//    public ListNode reverseList(ListNode head) {
+//
+//    }
+//
+//    public class ListNode {
+//        int val;
+//        ListNode next;
+//
+//        ListNode() {
+//        }
+//
+//        ListNode(int val) {
+//            this.val = val;
+//        }
+//
+//        ListNode(int val, ListNode next) {
+//            this.val = val;
+//            this.next = next;
+//        }
+//    }
 }
