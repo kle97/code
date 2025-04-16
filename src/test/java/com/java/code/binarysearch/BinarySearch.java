@@ -36,6 +36,9 @@ public class BinarySearch extends BaseTest {
         return new Object[][]{
                 {new int[] {-1,0,3,5,9,12}, 9, 4},
                 {new int[] {-1,0,3,5,9,12}, 2, -1},
+                {new int[] {5}, -5, -1},
+                {new int[] {5}, 5, 0},
+                {new int[] {-1,0,3,5,9,12}, 3, 2},
         };
     }
 
@@ -49,17 +52,16 @@ public class BinarySearch extends BaseTest {
     public int search(int[] nums, int target) {
         int i = 0;
         int j = nums.length - 1;
-        while (i <= j ) {
-            int middle = (j + i) / 2;
-            if (nums[middle] == target) {
-                return middle;
-            } else if (nums[middle] > target) {
-                j = middle - 1;
+        while (i <= j) {
+            int mid = (i + j) / 2;
+            if (nums[mid] > target) {
+                j = mid - 1;
+            } else if (nums[mid] < target) {
+                i = mid + 1;
             } else {
-                i = middle + 1;
+                return mid;
             }
         }
-
         return -1;
     }
 }
