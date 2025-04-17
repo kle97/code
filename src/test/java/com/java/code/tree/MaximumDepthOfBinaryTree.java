@@ -7,77 +7,74 @@ import org.testng.annotations.Test;
 import java.util.*;
 
 /**
- <p>Given the <code>root</code> of a binary tree, invert the tree, and return <em>its root</em>.</p>
+ <p>Given the <code>root</code> of a binary tree, return <em>its maximum depth</em>.</p>
 
- <p>&nbsp;</p>
- <p><strong class="example">Example 1:</strong></p>
- <img alt="" src="https://assets.leetcode.com/uploads/2021/03/14/invert1-tree.jpg" style="width: 500px; height: 165px;" />
+ <p>A binary tree's <strong>maximum depth</strong>&nbsp;is the number of nodes along the longest path from the root node down to the farthest leaf node.</p>
+
+ <p>&nbsp;</p> 
+ <p><strong class="example">Example 1:</strong></p> 
+ <img alt="" src="https://assets.leetcode.com/uploads/2020/11/26/tmp-tree.jpg" style="width: 400px; height: 277px;" /> 
  <pre>
- <strong>Input:</strong> root = [4,2,7,1,3,6,9]
- <strong>Output:</strong> [4,7,2,9,6,3,1]
+ <strong>Input:</strong> root = [3,9,20,null,null,15,7]
+ <strong>Output:</strong> 3
  </pre>
 
  <p><strong class="example">Example 2:</strong></p>
- <img alt="" src="https://assets.leetcode.com/uploads/2021/03/14/invert2-tree.jpg" style="width: 500px; height: 120px;" />
- <pre>
- <strong>Input:</strong> root = [2,1,3]
- <strong>Output:</strong> [2,3,1]
- </pre>
-
- <p><strong class="example">Example 3:</strong></p>
 
  <pre>
- <strong>Input:</strong> root = []
- <strong>Output:</strong> []
+ <strong>Input:</strong> root = [1,null,2]
+ <strong>Output:</strong> 2
  </pre>
 
- <p>&nbsp;</p>
+ <p>&nbsp;</p> 
  <p><strong>Constraints:</strong></p>
 
- <ul>
- <li>The number of nodes in the tree is in the range <code>[0, 100]</code>.</li>
- <li><code>-100 &lt;= Node.val &lt;= 100</code></li>
+ <ul> 
+ <li>The number of nodes in the tree is in the range <code>[0, 10<sup>4</sup>]</code>.</li> 
+ <li><code>-100 &lt;= Node.val &lt;= 100</code></li> 
  </ul>
 
- <div><div>Related Topics</div><div><li>Tree</li><li>Depth-First Search</li><li>Breadth-First Search</li><li>Binary Tree</li></div></div><br><div><li>👍 14526</li><li>👎 241</li></div>
+ <div><div>Related Topics</div><div><li>Tree</li><li>Depth-First Search</li><li>Breadth-First Search</li><li>Binary Tree</li></div></div><br><div><li>👍 13460</li><li>👎 259</li></div>
  */
-public class InvertBinaryTree extends BaseTest {
-
-
+public class MaximumDepthOfBinaryTree extends BaseTest {
+    
     @DataProvider
     public Object[][] data() {
         return new Object[][]{
-                {getNode(new Integer[] {4,2,7,1,3,6,9}), getNode(new Integer[] {4,7,2,9,6,3,1})},
-                {getNode(new Integer[] {2,1,3}), getNode(new Integer[] {2,3,1})},
-                {getNode(new Integer[] {}), getNode(new Integer[] {})},
+                {getNode(new Integer[] {3,9,20,null,null,15,7}), 3},
+                {getNode(new Integer[] {1,null,2}), 2},
         };
     }
 
     @Test(dataProvider = "data")
-    public void test(TreeNode root, TreeNode expected) {
+    public void test(TreeNode root, int expected) {
         softAssert.as(String.format("root = %s", Arrays.toString(showAll(root))))
-                  .assertThat(showAll(invertTree(root)))
-                  .isEqualTo(showAll(expected));
+                  .assertThat(maxDepth(root))
+                  .isEqualTo(expected);
     }
 
-    public TreeNode invertTree(TreeNode root) {
+    public int maxDepth(TreeNode root) {
+        int maxDepth = 0;
+        Map<TreeNode, Integer> depthMap = new HashMap<>();
         Deque<TreeNode> deque = new ArrayDeque<>();
-        if(root != null) {
+        if (root != null) {
             deque.offerLast(root);
+            depthMap.put(root, 1);
         }
         while (!deque.isEmpty()) {
             TreeNode current = deque.pollFirst();
+            int currentDepth = depthMap.get(current);
+            maxDepth = Math.max(currentDepth, maxDepth);
             if (current.left != null) {
                 deque.offerLast(current.left);
+                depthMap.put(current.left, currentDepth + 1);
             }
             if (current.right != null) {
                 deque.offerLast(current.right);
+                depthMap.put(current.right, currentDepth + 1);
             }
-            TreeNode temp = current.right;
-            current.right = current.left;
-            current.left = temp;
         }
-        return root;
+        return maxDepth;
     }
 
     public TreeNode getNode(Integer[] data) {

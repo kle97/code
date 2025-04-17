@@ -7,77 +7,91 @@ import org.testng.annotations.Test;
 import java.util.*;
 
 /**
- <p>Given the <code>root</code> of a binary tree, invert the tree, and return <em>its root</em>.</p>
+ <p>Given the roots of two binary trees <code>p</code> and <code>q</code>, write a function to check if they are the same or not.</p>
+
+ <p>Two binary trees are considered the same if they are structurally identical, and the nodes have the same value.</p>
 
  <p>&nbsp;</p>
  <p><strong class="example">Example 1:</strong></p>
- <img alt="" src="https://assets.leetcode.com/uploads/2021/03/14/invert1-tree.jpg" style="width: 500px; height: 165px;" />
+ <img alt="" src="https://assets.leetcode.com/uploads/2020/12/20/ex1.jpg" style="width: 622px; height: 182px;" />
  <pre>
- <strong>Input:</strong> root = [4,2,7,1,3,6,9]
- <strong>Output:</strong> [4,7,2,9,6,3,1]
+ <strong>Input:</strong> p = [1,2,3], q = [1,2,3]
+ <strong>Output:</strong> true
  </pre>
 
  <p><strong class="example">Example 2:</strong></p>
- <img alt="" src="https://assets.leetcode.com/uploads/2021/03/14/invert2-tree.jpg" style="width: 500px; height: 120px;" />
+ <img alt="" src="https://assets.leetcode.com/uploads/2020/12/20/ex2.jpg" style="width: 382px; height: 182px;" />
  <pre>
- <strong>Input:</strong> root = [2,1,3]
- <strong>Output:</strong> [2,3,1]
+ <strong>Input:</strong> p = [1,2], q = [1,null,2]
+ <strong>Output:</strong> false
  </pre>
 
  <p><strong class="example">Example 3:</strong></p>
-
+ <img alt="" src="https://assets.leetcode.com/uploads/2020/12/20/ex3.jpg" style="width: 622px; height: 182px;" />
  <pre>
- <strong>Input:</strong> root = []
- <strong>Output:</strong> []
+ <strong>Input:</strong> p = [1,2,1], q = [1,1,2]
+ <strong>Output:</strong> false
  </pre>
 
  <p>&nbsp;</p>
  <p><strong>Constraints:</strong></p>
 
  <ul>
- <li>The number of nodes in the tree is in the range <code>[0, 100]</code>.</li>
- <li><code>-100 &lt;= Node.val &lt;= 100</code></li>
+ <li>The number of nodes in both trees is in the range <code>[0, 100]</code>.</li>
+ <li><code>-10<sup>4</sup> &lt;= Node.val &lt;= 10<sup>4</sup></code></li>
  </ul>
 
- <div><div>Related Topics</div><div><li>Tree</li><li>Depth-First Search</li><li>Breadth-First Search</li><li>Binary Tree</li></div></div><br><div><li>👍 14526</li><li>👎 241</li></div>
+ <div><div>Related Topics</div><div><li>Tree</li><li>Depth-First Search</li><li>Breadth-First Search</li><li>Binary Tree</li></div></div><br><div><li>👍 12094</li><li>👎 263</li></div>
  */
-public class InvertBinaryTree extends BaseTest {
-
+public class SameTree extends BaseTest {
 
     @DataProvider
     public Object[][] data() {
         return new Object[][]{
-                {getNode(new Integer[] {4,2,7,1,3,6,9}), getNode(new Integer[] {4,7,2,9,6,3,1})},
-                {getNode(new Integer[] {2,1,3}), getNode(new Integer[] {2,3,1})},
-                {getNode(new Integer[] {}), getNode(new Integer[] {})},
+                {getNode(new Integer[] {1,2,3}), getNode(new Integer[] {1,2,3}), true},
+                {getNode(new Integer[] {1,2,}), getNode(new Integer[] {1,null,2}), false},
+                {getNode(new Integer[] {1,2,1}), getNode(new Integer[] {1,1,2}), false},
+                {getNode(new Integer[] {}), getNode(new Integer[] {}), true},
+                {getNode(new Integer[] {2,2,2,null,2,null,null,2}), getNode(new Integer[] {2,2,2,2,null,2,null}), false},
+                {getNode(new Integer[] {0,-5}), getNode(new Integer[] {0,-8}), false},
         };
     }
 
     @Test(dataProvider = "data")
-    public void test(TreeNode root, TreeNode expected) {
-        softAssert.as(String.format("root = %s", Arrays.toString(showAll(root))))
-                  .assertThat(showAll(invertTree(root)))
-                  .isEqualTo(showAll(expected));
+    public void test(TreeNode p, TreeNode q, boolean expected) {
+        softAssert.as(String.format("p = %s, q = %s", Arrays.toString(showAll(p)), Arrays.toString(showAll(q))))
+                  .assertThat(isSameTree(p, q))
+                  .isEqualTo(expected);
     }
 
-    public TreeNode invertTree(TreeNode root) {
-        Deque<TreeNode> deque = new ArrayDeque<>();
-        if(root != null) {
-            deque.offerLast(root);
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+        if (p == null && q == null) {
+            return true;
+        } else if (p == null) {
+            return false;
+        } else if (q == null) {
+            return false;
         }
-        while (!deque.isEmpty()) {
-            TreeNode current = deque.pollFirst();
-            if (current.left != null) {
-                deque.offerLast(current.left);
-            }
-            if (current.right != null) {
-                deque.offerLast(current.right);
-            }
-            TreeNode temp = current.right;
-            current.right = current.left;
-            current.left = temp;
+
+        return dfs(p, q);
+    }
+
+    public boolean dfs(TreeNode p, TreeNode q) {
+        if (!Objects.equals(p.val, q.val)) {
+            return false;
         }
-        return root;
+        boolean result = true;
+        if (p.left != null && q.left != null) {
+            result = dfs(p.left, q.left);
+        } else if (p.left != q.left) {
+            result = false;
+        }
+        if (p.right != null && q.right != null) {
+            result = result && dfs(p.right, q.right);
+        } else if (p.right != q.right) {
+            result = false;
+        }
+        return result;
     }
 
     public TreeNode getNode(Integer[] data) {

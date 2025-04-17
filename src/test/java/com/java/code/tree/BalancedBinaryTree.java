@@ -7,77 +7,84 @@ import org.testng.annotations.Test;
 import java.util.*;
 
 /**
- <p>Given the <code>root</code> of a binary tree, invert the tree, and return <em>its root</em>.</p>
+ <p>Given a binary tree, determine if it is <span data-keyword="height-balanced"><strong>height-balanced</strong></span>.</p>
 
  <p>&nbsp;</p>
  <p><strong class="example">Example 1:</strong></p>
- <img alt="" src="https://assets.leetcode.com/uploads/2021/03/14/invert1-tree.jpg" style="width: 500px; height: 165px;" />
+ <img alt="" src="https://assets.leetcode.com/uploads/2020/10/06/balance_1.jpg" style="width: 342px; height: 221px;" />
  <pre>
- <strong>Input:</strong> root = [4,2,7,1,3,6,9]
- <strong>Output:</strong> [4,7,2,9,6,3,1]
+ <strong>Input:</strong> root = [3,9,20,null,null,15,7]
+ <strong>Output:</strong> true
  </pre>
 
  <p><strong class="example">Example 2:</strong></p>
- <img alt="" src="https://assets.leetcode.com/uploads/2021/03/14/invert2-tree.jpg" style="width: 500px; height: 120px;" />
+ <img alt="" src="https://assets.leetcode.com/uploads/2020/10/06/balance_2.jpg" style="width: 452px; height: 301px;" />
  <pre>
- <strong>Input:</strong> root = [2,1,3]
- <strong>Output:</strong> [2,3,1]
+ <strong>Input:</strong> root = [1,2,2,3,3,null,null,4,4]
+ <strong>Output:</strong> false
  </pre>
 
  <p><strong class="example">Example 3:</strong></p>
 
  <pre>
  <strong>Input:</strong> root = []
- <strong>Output:</strong> []
+ <strong>Output:</strong> true
  </pre>
 
  <p>&nbsp;</p>
  <p><strong>Constraints:</strong></p>
 
  <ul>
- <li>The number of nodes in the tree is in the range <code>[0, 100]</code>.</li>
- <li><code>-100 &lt;= Node.val &lt;= 100</code></li>
+ <li>The number of nodes in the tree is in the range <code>[0, 5000]</code>.</li>
+ <li><code>-10<sup>4</sup> &lt;= Node.val &lt;= 10<sup>4</sup></code></li>
  </ul>
 
- <div><div>Related Topics</div><div><li>Tree</li><li>Depth-First Search</li><li>Breadth-First Search</li><li>Binary Tree</li></div></div><br><div><li>👍 14526</li><li>👎 241</li></div>
+ <div><div>Related Topics</div><div><li>Tree</li><li>Depth-First Search</li><li>Binary Tree</li></div></div><br><div><li>👍 11294</li><li>👎 761</li></div>
  */
-public class InvertBinaryTree extends BaseTest {
-
+public class BalancedBinaryTree extends BaseTest {
 
     @DataProvider
     public Object[][] data() {
         return new Object[][]{
-                {getNode(new Integer[] {4,2,7,1,3,6,9}), getNode(new Integer[] {4,7,2,9,6,3,1})},
-                {getNode(new Integer[] {2,1,3}), getNode(new Integer[] {2,3,1})},
-                {getNode(new Integer[] {}), getNode(new Integer[] {})},
+                {getNode(new Integer[] {3,9,20,null,null,15,7}), true},
+                {getNode(new Integer[] {1,2,2,3,3,null,null,4,4}), false},
+                {getNode(new Integer[] {}), true},
         };
     }
 
     @Test(dataProvider = "data")
-    public void test(TreeNode root, TreeNode expected) {
+    public void test(TreeNode root, boolean expected) {
         softAssert.as(String.format("root = %s", Arrays.toString(showAll(root))))
-                  .assertThat(showAll(invertTree(root)))
-                  .isEqualTo(showAll(expected));
+                  .assertThat(isBalanced(root))
+                  .isEqualTo(expected);
     }
 
-    public TreeNode invertTree(TreeNode root) {
-        Deque<TreeNode> deque = new ArrayDeque<>();
-        if(root != null) {
-            deque.offerLast(root);
+    private boolean isBalanced;
+
+    public boolean isBalanced(TreeNode root) {
+        if (root == null) {
+            return true;
         }
-        while (!deque.isEmpty()) {
-            TreeNode current = deque.pollFirst();
-            if (current.left != null) {
-                deque.offerLast(current.left);
-            }
-            if (current.right != null) {
-                deque.offerLast(current.right);
-            }
-            TreeNode temp = current.right;
-            current.right = current.left;
-            current.left = temp;
+        isBalanced = true;
+        dfs(root);
+        return isBalanced;
+    }
+
+    public int dfs(TreeNode current) {
+        int leftDepth = 0;
+        if (current.left != null) {
+            leftDepth = dfs(current.left);
         }
-        return root;
+
+        int rightDepth = 0;
+        if (current.right != null) {
+            rightDepth = dfs(current.right);
+        }
+
+        if (Math.abs(leftDepth - rightDepth) > 1) {
+            isBalanced = false;
+        }
+        return Math.max(leftDepth, rightDepth) + 1;
     }
 
     public TreeNode getNode(Integer[] data) {
