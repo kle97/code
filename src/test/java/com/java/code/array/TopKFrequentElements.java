@@ -7,6 +7,7 @@ import org.testng.annotations.Test;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.PriorityQueue;
 import java.util.stream.Collectors;
 
 /**
@@ -54,23 +55,18 @@ public class TopKFrequentElements extends BaseTest {
     }
 
     public int[] topKFrequent(int[] nums, int k) {
-        int[] ans = new int[k];
+        int[] result = new int[k];
         Map<Integer, Integer> map = new HashMap<>();
         for (int i = 0; i < nums.length; i++) {
-            int num = nums[i];
-            map.put(num, map.getOrDefault(num, 0) + 1);
+            map.put(nums[i], map.getOrDefault(nums[i], 0) + 1);
         }
-        
-        int i = 0;
-        for (Map.Entry<Integer, Integer> entry : map.entrySet().stream().sorted(Map.Entry.comparingByValue((a,b) -> b - a)).collect(Collectors.toList())) {
-            ans[i] = entry.getKey();
-            i++;
-            if (i >= k) {
-                return ans;
-            }
+        PriorityQueue<Map.Entry<Integer, Integer>> pq = new PriorityQueue<>((a, b) -> b.getValue() - a.getValue());
+        pq.addAll(map.entrySet());
+        for (int i = 0; i < k; i++) {
+            result[i] = pq.poll().getKey();
         }
 
-        return ans;
+        return result;
     }
     
 }

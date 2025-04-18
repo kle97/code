@@ -40,7 +40,7 @@ public class ProductOfArrayExceptSelf extends BaseTest {
 
     @DataProvider
     public Object[][] data() {
-        return new Object[][]{
+        return new Object[][] {
                 {new int[] {1,2,3,4}, new int[] {24,12,8,6}},
                 {new int[] {-1,1,0,-3,3}, new int[] {0,0,9,0,0}},
         };
@@ -54,25 +54,26 @@ public class ProductOfArrayExceptSelf extends BaseTest {
     }
 
     public int[] productExceptSelf(int[] nums) {
-        int[] nums1 = new int[nums.length];
+        int[] answer = new int[nums.length];
+        int[] forwardProducts = new int[nums.length];
+        int[] backwardProducts = new int[nums.length];
+
         int product = 1;
         for (int i = 0; i < nums.length; i++) {
-            nums1[i] = product;
             product *= nums[i];
+            forwardProducts[i] = product;
         }
-
-        int[] nums2 = new int[nums.length];
         product = 1;
         for (int i = nums.length - 1; i >= 0; i--) {
-            nums2[i] = product;
             product *= nums[i];
+            backwardProducts[i] = product;
         }
 
-        int[] ans = new int[nums.length];
-        for (int i = 0; i < nums.length; i++) {
-            ans[i] = nums1[i] * nums2[i];
+        answer[0] = backwardProducts[1];
+        answer[answer.length - 1] = forwardProducts[answer.length - 2];
+        for (int i = 1; i < answer.length - 1; i++) {
+            answer[i] = backwardProducts[i + 1] * forwardProducts[i - 1];
         }
-        
-        return ans;
+        return answer;
     }
 }
