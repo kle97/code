@@ -55,28 +55,29 @@ public class LongestConsecutiveSequence extends BaseTest {
                   .assertThat(longestConsecutive(nums))
                   .isEqualTo(expected);
     }
-    
+
     public int longestConsecutive(int[] nums) {
+        if (nums.length == 0) {
+            return 0;
+        }
         Set<Integer> set = new HashSet<>();
         for (int i = 0; i < nums.length; i++) {
             set.add(nums[i]);
         }
 
         int maxStreak = 0;
-        for (int i = 0; i < nums.length; i++) {
-            int num = nums[i];
-            if (set.contains(num) && !set.contains(num - 1)) {
+        for (int num : set) {
+            if (!set.contains(num - 1)) {
                 int streak = 1;
                 int nextNum = num + 1;
                 while (set.contains(nextNum)) {
                     streak++;
                     nextNum++;
                 }
-                
                 maxStreak = Math.max(maxStreak, streak);
             }
+
         }
-        
         return maxStreak;
     }
 }
