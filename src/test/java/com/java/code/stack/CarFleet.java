@@ -38,7 +38,7 @@ import java.util.Arrays;
  * <p>&nbsp;</p>
  * <p><strong>Constraints:</strong></p>
  * <ul>
- * <li><code>n == position.length == speed.length</code></li>
+ * <li><code>n == position .length == speed .length</code></li>
  * <li><code>1 &lt;= n &lt;= 10<sup>5</sup></code></li>
  * <li><code>0 &lt; target &lt;= 10<sup>6</sup></code></li>
  * <li><code>0 &lt;= position[i] &lt; target</code></li>

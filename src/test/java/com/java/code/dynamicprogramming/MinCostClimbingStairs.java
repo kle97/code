@@ -43,7 +43,7 @@ import java.util.Arrays;
  <p><strong>Constraints:</strong></p>
 
  <ul>
- <li><code>2 &lt;= cost.length &lt;= 1000</code></li>
+ <li><code>2 &lt;= cost .length &lt;= 1000</code></li>
  <li><code>0 &lt;= cost[i] &lt;= 999</code></li>
  </ul>
 

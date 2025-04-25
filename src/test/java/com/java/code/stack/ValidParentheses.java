@@ -31,7 +31,7 @@ import java.util.Deque;
  * <p>&nbsp;</p>
  * <p><strong>Constraints:</strong></p>
  * <ul>
- * <li><code>1 &lt;= s.length &lt;= 10<sup>4</sup></code></li>
+ * <li><code>1 &lt;= s .length &lt;= 10<sup>4</sup></code></li>
  * <li><code>s</code><span>&nbsp;</span>consists of parentheses only<span>&nbsp;</span><code>'()[]{}'</code>.</li>
  * </ul>
  */

@@ -26,9 +26,9 @@ import org.testng.annotations.Test;
  * <p>&nbsp;</p>
  * <p><strong>Constraints:</strong></p>
  * <ul>
- * <li><code>1 &lt;= s.length &lt;= 10<sup>5</sup></code></li>
+ * <li><code>1 &lt;= s .length &lt;= 10<sup>5</sup></code></li>
  * <li><code>s</code><span>&nbsp;</span>consists of lowercase English letters.</li>
- * <li><code>1 &lt;= k &lt;= s.length</code></li>
+ * <li><code>1 &lt;= k &lt;= s .length</code></li>
  * </ul>
  */
 public class MaximumNumberOfVowelsInASubstringOfGivenLength extends BaseTest {

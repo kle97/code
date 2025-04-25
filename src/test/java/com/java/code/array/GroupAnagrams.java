@@ -28,8 +28,8 @@ import java.util.*;
  <p><strong>Constraints:</strong></p>
 
  <ul> 
- <li><code>1 &lt;= strs.length &lt;= 10<sup>4</sup></code></li> 
- <li><code>0 &lt;= strs[i].length &lt;= 100</code></li> 
+ <li><code>1 &lt;= strs  .length &lt;= 10<sup>4</sup></code></li> 
+ <li><code>0 &lt;= strs[i]  .length &lt;= 100</code></li> 
  <li><code>strs[i]</code> consists of lowercase English letters.</li> 
  </ul>
 

@@ -26,7 +26,7 @@ import java.util.Arrays;
  <p><strong>Constraints:</strong></p>
 
  <ul> 
- <li><code>2 &lt;= nums.length &lt;= 10<sup>5</sup></code></li> 
+ <li><code>2 &lt;= nums .length &lt;= 10<sup>5</sup></code></li> 
  <li><code>-30 &lt;= nums[i] &lt;= 30</code></li> 
  <li>The product of any prefix or suffix of <code>nums</code> is <strong>guaranteed</strong> to fit in a <strong>32-bit</strong> integer.</li> 
  </ul>

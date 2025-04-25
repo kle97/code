@@ -38,7 +38,7 @@ import java.util.Map;
  <p><strong>Constraints:</strong></p>
 
  <ul> 
- <li><code>1 &lt;= text.length &lt;= 10<sup>4</sup></code></li> 
+ <li><code>1 &lt;= text .length &lt;= 10<sup>4</sup></code></li> 
  <li><code>text</code> consists of lower case English letters only.</li> 
  </ul>
 

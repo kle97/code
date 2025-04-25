@@ -38,7 +38,7 @@ import java.util.Arrays;
  <p><strong>Constraints:</strong></p>
 
  <ul> 
- <li><code>1 &lt;= arr.length &lt;= 10<sup>4</sup></code></li> 
+ <li><code>1 &lt;= arr .length &lt;= 10<sup>4</sup></code></li> 
  <li><code>1 &lt;= arr[i] &lt;= 10<sup>5</sup></code></li> 
  </ul>
 

@@ -42,7 +42,7 @@ import java.util.Arrays;
  <p><strong>Constraints:</strong></p>
 
  <ul> 
- <li><code>1 &lt;= k &lt;= nums.length &lt;= 1000</code></li> 
+ <li><code>1 &lt;= k &lt;= nums .length &lt;= 1000</code></li> 
  <li><code>0 &lt;= nums[i] &lt;= 10<sup>5</sup></code></li> 
  </ul>
 

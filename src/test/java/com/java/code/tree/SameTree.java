@@ -38,7 +38,7 @@ import java.util.*;
 
  <ul>
  <li>The number of nodes in both trees is in the range <code>[0, 100]</code>.</li>
- <li><code>-10<sup>4</sup> &lt;= Node.val &lt;= 10<sup>4</sup></code></li>
+ <li><code>-10<sup>4</sup> &lt;= Node .val &lt;= 10<sup>4</sup></code></li>
  </ul>
 
  <div><div>Related Topics</div><div><li>Tree</li><li>Depth-First Search</li><li>Breadth-First Search</li><li>Binary Tree</li></div></div><br><div><li>👍 12094</li><li>👎 263</li></div>

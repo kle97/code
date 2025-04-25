@@ -18,10 +18,10 @@ package com.java.code.array;
  <p><strong>Constraints:</strong></p>
 
  <ul> 
- <li><code>1 &lt;= flowerbed.length &lt;= 2 * 10<sup>4</sup></code></li> 
+ <li><code>1 &lt;= flowerbed .length &lt;= 2 * 10<sup>4</sup></code></li> 
  <li><code>flowerbed[i]</code> is <code>0</code> or <code>1</code>.</li> 
  <li>There are no two adjacent flowers in <code>flowerbed</code>.</li> 
- <li><code>0 &lt;= n &lt;= flowerbed.length</code></li> 
+ <li><code>0 &lt;= n &lt;= flowerbed .length</code></li> 
  </ul>
 
  <div><div>Related Topics</div><div><li>Array</li><li>Greedy</li></div></div><br><div><li>👍 6236</li><li>👎 1113</li></div>

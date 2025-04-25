@@ -40,8 +40,8 @@ package com.java.code.twopointers;
  <p><strong>Constraints:</strong></p>
 
  <ul> 
- <li><code>nums1.length == m + n</code></li> 
- <li><code>nums2.length == n</code></li> 
+ <li><code>nums1 .length == m + n</code></li> 
+ <li><code>nums2 .length == n</code></li> 
  <li><code>0 &lt;= m, n &lt;= 200</code></li> 
  <li><code>1 &lt;= m + n &lt;= 200</code></li> 
  <li><code>-10<sup>9</sup> &lt;= nums1[i], nums2[j] &lt;= 10<sup>9</sup></code></li> 

@@ -60,8 +60,8 @@ import java.util.Arrays;
  <p><strong>Constraints:</strong></p>
 
  <ul> 
- <li><code>board.length == 9</code></li> 
- <li><code>board[i].length == 9</code></li> 
+ <li><code>board .length == 9</code></li> 
+ <li><code>board[i] .length == 9</code></li> 
  <li><code>board[i][j]</code> is a digit <code>1-9</code> or <code>'.'</code>.</li> 
  </ul>
 

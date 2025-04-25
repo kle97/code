@@ -23,8 +23,8 @@ import java.util.Arrays;
  * <p>&nbsp;</p>
  * <p><strong>Constraints:</strong></p>
  * <ul>
- * <li><code>nums1.length == m</code></li>
- * <li><code>nums2.length == n</code></li>
+ * <li><code>nums1 .length == m</code></li>
+ * <li><code>nums2 .length == n</code></li>
  * <li><code>0 &lt;= m &lt;= 1000</code></li>
  * <li><code>0 &lt;= n &lt;= 1000</code></li>
  * <li><code>1 &lt;= m + n &lt;= 2000</code></li>

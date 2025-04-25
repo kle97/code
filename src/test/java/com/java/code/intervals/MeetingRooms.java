@@ -27,7 +27,7 @@ import java.util.List;
  * <p></p>
  * <p><strong>Constraints: </strong></p>
  * <ul>
- * <li>0 <= intervals.length <= 500</li>
+ * <li>0 <= intervals .length <= 500</li>
  * <li>0 <= intervals[i].start < intervals[i].end <= 1,000,000</li>
  * </ul>
  */

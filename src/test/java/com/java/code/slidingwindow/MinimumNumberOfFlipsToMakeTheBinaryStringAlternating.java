@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
  * <p>You are given a binary string<span>&nbsp;</span><code>s</code>. You are allowed to perform two types of operations on the string in any sequence:</p>
  * <ul>
  * <li><strong>Type-1: Remove</strong><span>&nbsp;</span>the character at the start of the string<span>&nbsp;</span><code>s</code><span>&nbsp;</span>and<span>&nbsp;</span><strong>append</strong><span>&nbsp;</span>it to the end of the string.</li>
- * <li><strong>Type-2: Pick</strong><span>&nbsp;</span>any character in<span>&nbsp;</span><code>s</code><span>&nbsp;</span>and<span>&nbsp;</span><strong>flip</strong><span>&nbsp;</span>its value, i.e., if its value is<span>&nbsp;</span><code>'0'</code><span>&nbsp;</span>it becomes<span>&nbsp;</span><code>'1'</code><span>&nbsp;</span>and vice-versa.</li>
+ * <li><strong>Type-2: Pick</strong><span>&nbsp;</span>any character in<span>&nbsp;</span><code>s</code><span>&nbsp;</span>and<span>&nbsp;</span><strong>flip</strong><span>&nbsp;</span>its value, i .e., if its value is<span>&nbsp;</span><code>'0'</code><span>&nbsp;</span>it becomes<span>&nbsp;</span><code>'1'</code><span>&nbsp;</span>and vice-versa.</li>
  * </ul>
  * <p>Return<span>&nbsp;</span><em>the<span>&nbsp;</span><strong>minimum</strong><span>&nbsp;</span>number of<span>&nbsp;</span><strong>type-2</strong><span>&nbsp;</span>operations you need to perform</em><span>&nbsp;</span><em>such that<span>&nbsp;</span></em><code>s</code><span>&nbsp;</span><em>becomes<span>&nbsp;</span><strong>alternating</strong>.</em></p>
  * <p>The string is called<span>&nbsp;</span><strong>alternating</strong><span>&nbsp;</span>if no two adjacent characters are equal.</p>
@@ -35,7 +35,7 @@ import org.testng.annotations.Test;
  * <p>&nbsp;</p>
  * <p><strong>Constraints:</strong></p>
  * <ul>
- * <li><code>1 &lt;= s.length &lt;= 10<sup>5</sup></code></li>
+ * <li><code>1 &lt;= s .length &lt;= 10<sup>5</sup></code></li>
  * <li><code>s[i]</code><span>&nbsp;</span>is either<span>&nbsp;</span><code>'0'</code><span>&nbsp;</span>or<span>&nbsp;</span><code>'1'</code>.</li>
  * </ul>
  */

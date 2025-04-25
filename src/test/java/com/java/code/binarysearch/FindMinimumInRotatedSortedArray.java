@@ -34,7 +34,7 @@ import java.util.Arrays;
  * <p>&nbsp;</p>
  * <p><strong>Constraints:</strong></p>
  * <ul>
- * <li><code>n == nums.length</code></li>
+ * <li><code>n == nums .length</code></li>
  * <li><code>1 &lt;= n &lt;= 5000</code></li>
  * <li><code>-5000 &lt;= nums[i] &lt;= 5000</code></li>
  * <li>All the integers of<span>&nbsp;</span><code>nums</code><span>&nbsp;</span>are<span>&nbsp;</span><strong>unique</strong>.</li>

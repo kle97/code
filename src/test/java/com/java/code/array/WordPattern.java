@@ -38,9 +38,9 @@ import java.util.Map;
  <p><strong>Constraints:</strong></p>
 
  <ul> 
- <li><code>1 &lt;= pattern.length &lt;= 300</code></li> 
+ <li><code>1 &lt;= pattern .length &lt;= 300</code></li> 
  <li><code>pattern</code> contains only lower-case English letters.</li> 
- <li><code>1 &lt;= s.length &lt;= 3000</code></li> 
+ <li><code>1 &lt;= s .length &lt;= 3000</code></li> 
  <li><code>s</code> contains only lowercase English letters and spaces <code>' '</code>.</li> 
  <li><code>s</code> <strong>does not contain</strong> any leading or trailing spaces.</li> 
  <li>All the words in <code>s</code> are separated by a <strong>single space</strong>.</li> 

@@ -38,8 +38,8 @@ import java.util.Map;
  * <p>&nbsp;</p>
  * <p><strong>Constraints:</strong></p>
  * <ul>
- * <li><code>1 &lt;= fruits.length &lt;= 10<sup>5</sup></code></li>
- * <li><code>0 &lt;= fruits[i] &lt; fruits.length</code></li>
+ * <li><code>1 &lt;= fruits .length &lt;= 10<sup>5</sup></code></li>
+ * <li><code>0 &lt;= fruits[i] &lt; fruits .length</code></li>
  * </ul>
  */
 public class FruitIntoBaskets extends BaseTest {

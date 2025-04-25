@@ -34,7 +34,7 @@ import java.util.*;
 
  <ul> 
  <li>The number of nodes in the tree is in the range <code>[1, 10<sup>4</sup>]</code>.</li> 
- <li><code>-100 &lt;= Node.val &lt;= 100</code></li> 
+ <li><code>-100 &lt;= Node .val &lt;= 100</code></li> 
  </ul>
 
  <div><div>Related Topics</div><div><li>Tree</li><li>Depth-First Search</li><li>Binary Tree</li></div></div><br><div><li>👍 14621</li><li>👎 1147</li></div>

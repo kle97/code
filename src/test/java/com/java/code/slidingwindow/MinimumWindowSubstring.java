@@ -39,8 +39,8 @@ import java.util.Map;
  * <p>&nbsp;</p>
  * <p><strong>Constraints:</strong></p>
  * <ul>
- * <li><code>m == s.length</code></li>
- * <li><code>n == t.length</code></li>
+ * <li><code>m == s .length</code></li>
+ * <li><code>n == t .length</code></li>
  * <li><code>1 &lt;= m, n &lt;= 10<sup>5</sup></code></li>
  * <li><code>s</code><span>&nbsp;</span>and<span>&nbsp;</span><code>t</code><span>&nbsp;</span>consist of uppercase and lowercase English letters.</li>
  * </ul>

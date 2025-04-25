@@ -45,7 +45,7 @@ import java.util.PriorityQueue;
  <p><strong>Constraints:</strong></p>
 
  <ul>
- <li><code>1 &lt;= stones.length &lt;= 30</code></li>
+ <li><code>1 &lt;= stones .length &lt;= 30</code></li>
  <li><code>1 &lt;= stones[i] &lt;= 1000</code></li>
  </ul>
 

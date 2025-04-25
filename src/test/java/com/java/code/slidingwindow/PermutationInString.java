@@ -32,7 +32,7 @@ import java.util.Map;
  <p><strong>Constraints:</strong></p>
 
  <ul>
- <li><code>1 &lt;= s1.length, s2.length &lt;= 10<sup>4</sup></code></li>
+ <li><code>1 &lt;= s1 .length, s2 .length &lt;= 10<sup>4</sup></code></li>
  <li><code>s1</code> and <code>s2</code> consist of lowercase English letters.</li>
  </ul>
 

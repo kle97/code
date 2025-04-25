@@ -18,8 +18,8 @@ package com.java.code.twopointers;
  <p><strong>Constraints:</strong></p>
 
  <ul> 
- <li><code>1 &lt;= s.length &lt;= 10<sup>5</sup></code></li> 
- <li><code>s[i]</code> is a <a href="https://en.wikipedia.org/wiki/ASCII#Printable_characters" target="_blank">printable ascii character</a>.</li> 
+ <li><code>1 &lt;= s .length &lt;= 10<sup>5</sup></code></li> 
+ <li><code>s[i]</code> is a <a href="https://en.wikipedia .org/wiki/ASCII#Printable_characters" target="_blank">printable ascii character</a>.</li> 
  </ul>
 
  <div><div>Related Topics</div><div><li>Two Pointers</li><li>String</li></div></div><br><div><li>👍 8182</li><li>👎 1145</li></div>

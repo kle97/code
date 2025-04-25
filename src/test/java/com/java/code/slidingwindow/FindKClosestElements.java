@@ -5,7 +5,6 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * <p>Given a<span>&nbsp;</span><strong>sorted</strong><span>&nbsp;</span>integer array<span>&nbsp;</span><code>arr</code>, two integers<span>&nbsp;</span><code>k</code><span>&nbsp;</span>and<span>&nbsp;</span><code>x</code>, return the<span>&nbsp;</span><code>k</code><span>&nbsp;</span>closest integers to<span>&nbsp;</span><code>x</code><span>&nbsp;</span>in the array. The result should also be sorted in ascending order.</p>
@@ -26,8 +25,8 @@ import java.util.stream.Collectors;
  * <p>&nbsp;</p>
  * <p><strong>Constraints:</strong></p>
  * <ul>
- * <li><code>1 &lt;= k &lt;= arr.length</code></li>
- * <li><code>1 &lt;= arr.length &lt;= 10<sup>4</sup></code></li>
+ * <li><code>1 &lt;= k &lt;= arr .length</code></li>
+ * <li><code>1 &lt;= arr .length &lt;= 10<sup>4</sup></code></li>
  * <li><code>arr</code><span>&nbsp;</span>is sorted in<span>&nbsp;</span><strong>ascending</strong><span>&nbsp;</span>order.</li>
  * <li><code>-10<sup>4</sup> &lt;= arr[i], x &lt;= 10<sup>4</sup></code></li>
  * </ul>

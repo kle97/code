@@ -5,9 +5,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 /**
  <p>Given a string <code>s</code>, find the length of the <strong>longest</strong> <span data-keyword="substring-nonempty"><strong>substring</strong></span> without repeating characters.</p>
@@ -42,7 +40,7 @@ import java.util.Set;
  <p><strong>Constraints:</strong></p>
 
  <ul>
- <li><code>0 &lt;= s.length &lt;= 5 * 10<sup>4</sup></code></li>
+ <li><code>0 &lt;= s .length &lt;= 5 * 10<sup>4</sup></code></li>
  <li><code>s</code> consists of English letters, digits, symbols and spaces.</li>
  </ul>
 

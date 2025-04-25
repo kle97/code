@@ -34,9 +34,9 @@ import java.util.Map;
  <p><strong>Constraints:</strong></p>
 
  <ul>
- <li><code>1 &lt;= s.length &lt;= 10<sup>5</sup></code></li>
+ <li><code>1 &lt;= s .length &lt;= 10<sup>5</sup></code></li>
  <li><code>s</code> consists of only uppercase English letters.</li>
- <li><code>0 &lt;= k &lt;= s.length</code></li>
+ <li><code>0 &lt;= k &lt;= s .length</code></li>
  </ul>
 
  <div><div>Related Topics</div><div><li>Hash Table</li><li>String</li><li>Sliding Window</li></div></div><br><div><li>👍 10153</li><li>👎 470</li></div>

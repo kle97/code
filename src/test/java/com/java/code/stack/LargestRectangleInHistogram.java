@@ -4,7 +4,7 @@ import com.java.code.common.BaseTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.util.*;
+import java.util.Arrays;
 
 /**
  * <p>Given an array of integers<span>&nbsp;</span><code>heights</code><span>&nbsp;</span>representing the histogram's bar height where the width of each bar is<span>&nbsp;</span><code>1</code>, return<span>&nbsp;</span><em>the area of the largest rectangle in the histogram</em>.</p>
@@ -24,7 +24,7 @@ import java.util.*;
  * <p>&nbsp;</p>
  * <p><strong>Constraints:</strong></p>
  * <ul>
- * <li><code>1 &lt;= heights.length &lt;= 10<sup>5</sup></code></li>
+ * <li><code>1 &lt;= heights .length &lt;= 10<sup>5</sup></code></li>
  * <li><code>0 &lt;= heights[i] &lt;= 10<sup>4</sup></code></li>
  * </ul>
  */

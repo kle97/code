@@ -38,7 +38,7 @@ import org.testng.annotations.Test;
  <p><strong>Constraints:</strong></p>
 
  <ul> 
- <li><code>1 &lt;= s.length &lt;= 10<sup>4</sup></code></li> 
+ <li><code>1 &lt;= s .length &lt;= 10<sup>4</sup></code></li> 
  <li><code>s</code> consists of only English letters and spaces <code>' '</code>.</li> 
  <li>There will be at least one word in <code>s</code>.</li> 
  </ul>

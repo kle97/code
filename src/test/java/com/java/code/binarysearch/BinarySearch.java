@@ -23,7 +23,7 @@ import java.util.Arrays;
  * <p>&nbsp;</p>
  * <p><strong>Constraints:</strong></p>
  * <ul>
- * <li><code>1 &lt;= nums.length &lt;= 10<sup>4</sup></code></li>
+ * <li><code>1 &lt;= nums .length &lt;= 10<sup>4</sup></code></li>
  * <li><code>-10<sup>4</sup> &lt; nums[i], target &lt; 10<sup>4</sup></code></li>
  * <li>All the integers in<span>&nbsp;</span><code>nums</code><span>&nbsp;</span>are<span>&nbsp;</span><strong>unique</strong>.</li>
  * <li><code>nums</code><span>&nbsp;</span>is sorted in ascending order.</li>

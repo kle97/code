@@ -32,8 +32,8 @@ import java.util.*;
  <ul> 
  <li>The number of nodes in the <code>root</code> tree is in the range <code>[1, 2000]</code>.</li> 
  <li>The number of nodes in the <code>subRoot</code> tree is in the range <code>[1, 1000]</code>.</li> 
- <li><code>-10<sup>4</sup> &lt;= root.val &lt;= 10<sup>4</sup></code></li> 
- <li><code>-10<sup>4</sup> &lt;= subRoot.val &lt;= 10<sup>4</sup></code></li> 
+ <li><code>-10<sup>4</sup> &lt;= root .val &lt;= 10<sup>4</sup></code></li> 
+ <li><code>-10<sup>4</sup> &lt;= subRoot .val &lt;= 10<sup>4</sup></code></li> 
  </ul>
 
  <div><div>Related Topics</div><div><li>Tree</li><li>Depth-First Search</li><li>String Matching</li><li>Binary Tree</li><li>Hash Function</li></div></div><br><div><li>👍 8500</li><li>👎 559</li></div>

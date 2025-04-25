@@ -37,7 +37,7 @@ import java.util.Arrays;
  <p><strong>Constraints:</strong></p>
 
  <ul> 
- <li><code>n == nums.length</code></li> 
+ <li><code>n == nums  .length</code></li> 
  <li><code>1 &lt;= n &lt;= 1000</code></li> 
  <li><code>1 &lt;= nums[i] &lt;= 1000</code></li> 
  </ul>

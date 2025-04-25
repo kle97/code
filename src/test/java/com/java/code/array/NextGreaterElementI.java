@@ -38,7 +38,7 @@ import java.util.Map;
  <p><strong>Constraints:</strong></p>
 
  <ul> 
- <li><code>1 &lt;= nums1.length &lt;= nums2.length &lt;= 1000</code></li> 
+ <li><code>1 &lt;= nums1 .length &lt;= nums2 .length &lt;= 1000</code></li> 
  <li><code>0 &lt;= nums1[i], nums2[i] &lt;= 10<sup>4</sup></code></li> 
  <li>All integers in <code>nums1</code> and <code>nums2</code> are <strong>unique</strong>.</li> 
  <li>All the integers of <code>nums1</code> also appear in <code>nums2</code>.</li> 

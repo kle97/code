@@ -27,8 +27,8 @@ import java.util.Arrays;
  * <p>&nbsp;</p>
  * <p><strong>Constraints:</strong></p>
  * <ul>
- * <li><code>1 &lt;= piles.length &lt;= 10<sup>4</sup></code></li>
- * <li><code>piles.length &lt;= h &lt;= 10<sup>9</sup></code></li>
+ * <li><code>1 &lt;= piles .length &lt;= 10<sup>4</sup></code></li>
+ * <li><code>piles .length &lt;= h &lt;= 10<sup>9</sup></code></li>
  * <li><code>1 &lt;= piles[i] &lt;= 10<sup>9</sup></code></li>
  * </ul>
  */

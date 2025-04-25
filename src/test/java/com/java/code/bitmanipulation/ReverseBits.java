@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 
  <ul>
  <li>Note that in some languages, such as Java, there is no unsigned integer type. In this case, both input and output will be given as a signed integer type. They should not affect your implementation, as the integer's internal binary representation is the same, whether it is signed or unsigned.</li>
- <li>In Java, the compiler represents the signed integers using <a href="https://en.wikipedia.org/wiki/Two%27s_complement" target="_blank">2's complement notation</a>. Therefore, in <strong class="example">Example 2</strong> above, the input represents the signed integer <code>-3</code> and the output represents the signed integer <code>-1073741825</code>.</li>
+ <li>In Java, the compiler represents the signed integers using <a href="https://en.wikipedia .org/wiki/Two%27s_complement" target="_blank">2's complement notation</a>. Therefore, in <strong class="example">Example 2</strong> above, the input represents the signed integer <code>-3</code> and the output represents the signed integer <code>-1073741825</code>.</li>
  </ul>
 
  <p>&nbsp;</p>
@@ -35,7 +35,7 @@ import org.testng.annotations.Test;
  <p><strong>Constraints:</strong></p>
 
  <ul>
- <li>The input must be a <strong>binary string</strong> of length <code>32</code></li>
+ <li>The input must be a <strong>binary string</strong> of .length <code>32</code></li>
  </ul>
 
  <p>&nbsp;</p>
@@ -80,6 +80,7 @@ public class ReverseBits extends BaseTest {
             }
         }
 
+        System.out.println(result);
         return result;
     }
 }

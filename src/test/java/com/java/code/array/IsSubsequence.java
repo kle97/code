@@ -22,8 +22,8 @@ import org.testng.annotations.Test;
  <p><strong>Constraints:</strong></p>
 
  <ul> 
- <li><code>0 &lt;= s.length &lt;= 100</code></li> 
- <li><code>0 &lt;= t.length &lt;= 10<sup>4</sup></code></li> 
+ <li><code>0 &lt;= s  .length &lt;= 100</code></li> 
+ <li><code>0 &lt;= t  .length &lt;= 10<sup>4</sup></code></li> 
  <li><code>s</code> and <code>t</code> consist only of lowercase English letters.</li> 
  </ul>
 

@@ -40,7 +40,7 @@ import java.util.Arrays;
  <p><strong>Constraints:</strong></p>
 
  <ul>
- <li><code>1 &lt;= nums.length &lt;= 3 * 10<sup>4</sup></code></li>
+ <li><code>1 &lt;= nums .length &lt;= 3 * 10<sup>4</sup></code></li>
  <li><code>-3 * 10<sup>4</sup> &lt;= nums[i] &lt;= 3 * 10<sup>4</sup></code></li>
  <li>Each element in the array appears twice except for one element which appears only once.</li>
  </ul>

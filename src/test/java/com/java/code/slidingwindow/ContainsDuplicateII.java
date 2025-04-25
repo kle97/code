@@ -4,7 +4,9 @@ import com.java.code.common.BaseTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  <p>Given an integer array <code>nums</code> and an integer <code>k</code>, return <code>true</code> <em>if there are two <strong>distinct indices</strong> </em><code>i</code><em> and </em><code>j</code><em> in the array such that </em><code>nums[i] == nums[j]</code><em> and </em><code>abs(i - j) &lt;= k</code>.</p>
@@ -35,7 +37,7 @@ import java.util.*;
  <p><strong>Constraints:</strong></p>
 
  <ul>
- <li><code>1 &lt;= nums.length &lt;= 10<sup>5</sup></code></li>
+ <li><code>1 &lt;= nums .length &lt;= 10<sup>5</sup></code></li>
  <li><code>-10<sup>9</sup> &lt;= nums[i] &lt;= 10<sup>9</sup></code></li>
  <li><code>0 &lt;= k &lt;= 10<sup>5</sup></code></li>
  </ul>

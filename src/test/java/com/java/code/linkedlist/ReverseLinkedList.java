@@ -38,7 +38,7 @@ import java.util.List;
 
  <ul>
  <li>The number of nodes in the list is the range <code>[0, 5000]</code>.</li>
- <li><code>-5000 &lt;= Node.val &lt;= 5000</code></li>
+ <li><code>-5000 &lt;= Node .val &lt;= 5000</code></li>
  </ul>
 
  <p>&nbsp;</p>

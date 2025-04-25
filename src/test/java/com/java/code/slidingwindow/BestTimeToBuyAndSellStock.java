@@ -35,7 +35,7 @@ import java.util.Arrays;
  <p><strong>Constraints:</strong></p>
 
  <ul>
- <li><code>1 &lt;= prices.length &lt;= 10<sup>5</sup></code></li>
+ <li><code>1 &lt;= prices .length &lt;= 10<sup>5</sup></code></li>
  <li><code>0 &lt;= prices[i] &lt;= 10<sup>4</sup></code></li>
  </ul>
 

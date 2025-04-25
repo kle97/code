@@ -11,7 +11,7 @@ package com.java.code.array;
 
  <ul> 
  <li><code>NumArray(int[] nums)</code> Initializes the object with the integer array <code>nums</code>.</li> 
- <li><code>int sumRange(int left, int right)</code> Returns the <strong>sum</strong> of the elements of <code>nums</code> between indices <code>left</code> and <code>right</code> <strong>inclusive</strong> (i.e. <code>nums[left] + nums[left + 1] + ... + nums[right]</code>).</li> 
+ <li><code>int sumRange(int left, int right)</code> Returns the <strong>sum</strong> of the elements of <code>nums</code> between indices <code>left</code> and <code>right</code> <strong>inclusive</strong> (i .e. <code>nums[left] + nums[left + 1] + ... + nums[right]</code>).</li> 
  </ul>
 
  <p>&nbsp;</p> 
@@ -35,9 +35,9 @@ package com.java.code.array;
  <p><strong>Constraints:</strong></p>
 
  <ul> 
- <li><code>1 &lt;= nums.length &lt;= 10<sup>4</sup></code></li> 
+ <li><code>1 &lt;= nums .length &lt;= 10<sup>4</sup></code></li> 
  <li><code>-10<sup>5</sup> &lt;= nums[i] &lt;= 10<sup>5</sup></code></li> 
- <li><code>0 &lt;= left &lt;= right &lt; nums.length</code></li> 
+ <li><code>0 &lt;= left &lt;= right &lt; nums .length</code></li> 
  <li>At most <code>10<sup>4</sup></code> calls will be made to <code>sumRange</code>.</li> 
  </ul>
 
