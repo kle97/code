@@ -1,5 +1,11 @@
 package com.java.code.array;
 
+import com.java.code.common.BaseTest;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
+
+import java.util.Arrays;
+
 /**
  <p>You have a long flowerbed in which some of the plots are planted, and some are not. However, flowers cannot be planted in <strong>adjacent</strong> plots.</p>
 
@@ -18,15 +24,31 @@ package com.java.code.array;
  <p><strong>Constraints:</strong></p>
 
  <ul> 
- <li><code>1 &lt;= flowerbed .length &lt;= 2 * 10<sup>4</sup></code></li> 
+ <li><code>1 &lt;= flowerbed.length &lt;= 2 * 10<sup>4</sup></code></li> 
  <li><code>flowerbed[i]</code> is <code>0</code> or <code>1</code>.</li> 
  <li>There are no two adjacent flowers in <code>flowerbed</code>.</li> 
- <li><code>0 &lt;= n &lt;= flowerbed .length</code></li> 
+ <li><code>0 &lt;= n &lt;= flowerbed.length</code></li> 
  </ul>
 
  <div><div>Related Topics</div><div><li>Array</li><li>Greedy</li></div></div><br><div><li>👍 6236</li><li>👎 1113</li></div>
  */
-public class CanPlaceFlowers {
+public class CanPlaceFlowers extends BaseTest {
+
+    @DataProvider
+    public Object[][] data() {
+        return new Object[][]{
+                {new int[]{1,0,0,0,1}, 1, true},
+                {new int[]{1,0,0,0,1}, 2, false},
+        };
+    }
+
+    @Test(dataProvider = "data")
+    public void test(int[] flowerbed, int n, boolean expected) {
+        softAssert.as("flowerbed = %s, n = %d", Arrays.toString(flowerbed), n)
+                  .assertThat(canPlaceFlowers(flowerbed, n))
+                  .isEqualTo(expected);
+    }
+    
     public boolean canPlaceFlowers(int[] flowerbed, int n) {
         if (n == 0) {
             return true;

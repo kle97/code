@@ -9,7 +9,7 @@ public abstract class BaseTest {
     
     @BeforeClass
     public void beforeClass() {
-        softAssert = new SoftAssertJ();
+        softAssert = SoftAssertJ.getInstance();
     }
 
     @AfterClass
@@ -17,7 +17,6 @@ public abstract class BaseTest {
         try {
             softAssert.assertAll();
         } catch (Error e) {
-
         }
     }
 }

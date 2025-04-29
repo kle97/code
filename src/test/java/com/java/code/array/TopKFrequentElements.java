@@ -51,7 +51,7 @@ public class TopKFrequentElements extends BaseTest {
     public void test(int[] nums, int k, int[] expected) {
         softAssert.as(String.format("nums = %s, k = %d", Arrays.toString(nums), k))
                   .assertThat(Arrays.stream(topKFrequent(nums, k)).boxed().collect(Collectors.toList()))
-                  .isEqualNoOrder(Arrays.stream(expected).boxed().collect(Collectors.toList()));
+                  .containsExactlyInAnyOrderElementsOf(Arrays.stream(expected).boxed().collect(Collectors.toList()));
     }
 
     public int[] topKFrequent(int[] nums, int k) {

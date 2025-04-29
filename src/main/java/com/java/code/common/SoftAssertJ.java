@@ -1,320 +1,175 @@
 package com.java.code.common;
 
+import lombok.Builder;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import org.assertj.core.util.Streams;
-import org.testng.Assert;
-import org.testng.asserts.IAssert;
+import org.assertj.core.api.Assert;
+import org.assertj.core.api.AssertionErrorCollector;
+import org.assertj.core.api.SoftAssertions;
+import org.assertj.core.description.Description;
+import org.assertj.core.description.LazyTextDescription;
+import org.assertj.core.description.TextDescription;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
+import java.util.function.Supplier;
 
-import static java.util.stream.Collectors.toCollection;
+import static java.util.Collections.synchronizedList;
+import static java.util.Collections.unmodifiableList;
 
 @Slf4j
-public class SoftAssertJ {
-    
-    private final SoftAssertion softAssertion = new SoftAssertion();
-    
-    public SoftAssertJ() {
-    }
-    
-    public void assertAll() {
-        softAssertion.assertAll();
-    }
-    
-    public AssertWithMessage as(String message) {
-        return new AssertWithMessage(softAssertion, message);
-    }
-    
-    public <T> BaseSoftAssertion<T> assertThat(T actual) {
-        return new BaseSoftAssertion<>(softAssertion, null, actual);
+public class SoftAssertJ extends SoftAssertions {
+
+    private static final StackWalker STACK_WALKER = StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE);
+    private static final ThreadLocal<AssertionDescription> messages = new ThreadLocal<>();
+    private static final ThreadLocal<Logger> logger = new ThreadLocal<>();
+    private static final ThreadLocal<Object> savedActual = new ThreadLocal<>();
+    private static SoftAssertJ softAssertJ;
+
+    public static SoftAssertJ getInstance() {
+        if (softAssertJ == null) {
+            softAssertJ = new SoftAssertJ();
+            softAssertJ.setDelegate(new AssertionErrorCollectorDelegate());
+        }
+        return softAssertJ;
     }
 
-    public BooleanSoftAssertion assertThat(boolean actual) {
-        return new BooleanSoftAssertion(softAssertion, null, actual);
+    private SoftAssertJ() {
     }
 
-    public StringSoftAssertion assertThat(String actual) {
-        return new StringSoftAssertion(softAssertion, null, actual);
+    public SoftAssertJ as(String description, Object... args) {
+        messages.set(AssertionDescription.builder().formatter(description).args(args).build());
+        return this;
     }
 
-    public <T extends Comparable<T>> NumberSoftAssertion<T> assertThat(T actual) {
-        return new NumberSoftAssertion<>(softAssertion, null, actual);
+    public SoftAssertJ as(Description description) {
+        messages.set(AssertionDescription.builder().description(description).build());
+        return this;
     }
 
-    public <T extends Iterable<?>> IterableSoftAssertion<T> assertThat(T actual) {
-        return new IterableSoftAssertion<>(softAssertion, null, actual);
-    }
-    
-    public static class AssertWithMessage {
-        
-        private final SoftAssertion softAssertion;
-        
-        private final String message;
-        
-        public AssertWithMessage(SoftAssertion softAssertion, String message) {
-            this.softAssertion = softAssertion;
-            this.message = message;
-        }
-        
-        public <T> BaseSoftAssertion<T> assertThat(T actual) {
-            return new BaseSoftAssertion<>(softAssertion, message, actual);
-        }
-
-        public BooleanSoftAssertion assertThat(boolean actual) {
-            return new BooleanSoftAssertion(softAssertion, message, actual);
-        }
-
-        public StringSoftAssertion assertThat(String actual) {
-            return new StringSoftAssertion(softAssertion, message, actual);
-        }
-
-        public <T extends Comparable<T>> NumberSoftAssertion<T> assertThat(T actual) {
-            return new NumberSoftAssertion<>(softAssertion, message, actual);
-        }
-
-        public <T extends Iterable<?>> IterableSoftAssertion<T> assertThat(T actual) {
-            return new IterableSoftAssertion<>(softAssertion, message, actual);
-        }
+    public SoftAssertJ as(Supplier<String> description) {
+        messages.set(AssertionDescription.builder().supplier(description).build());
+        return this;
     }
 
-    public static class BooleanSoftAssertion extends BaseSoftAssertion<Boolean> {
-
-        public BooleanSoftAssertion(SoftAssertion softAssertion, String message, Boolean actual) {
-            super(softAssertion, message, actual);
-        }
-
-        public BooleanSoftAssertion as(String message) {
-            this.innerMessage = message;
-            return this;
-        }
-
-        public BooleanSoftAssertion assertTrue(String prefix) {
-            softAssertion.assertTrue(actual, innerMessage);
-            return this;
-        }
-
-        public BooleanSoftAssertion assertFalse() {
-            softAssertion.assertFalse(actual, innerMessage);
-            return this;
-        }
+    @Override
+    public <SELF extends Assert<? extends SELF, ? extends ACTUAL>, ACTUAL> SELF proxy(Class<SELF> assertClass,
+                                                                                      Class<ACTUAL> actualClass,
+                                                                                      ACTUAL actual) {
+        return proxy(assertClass, actualClass, actual, 3);
     }
 
-    public static class StringSoftAssertion extends BaseSoftAssertion<String> {
+    public <SELF extends Assert<? extends SELF, ? extends ACTUAL>, ACTUAL> SELF proxy(Class<SELF> assertClass,
+                                                                                      Class<ACTUAL> actualClass,
+                                                                                      ACTUAL actual, int walkStep) {
+        SELF proxy = super.proxy(assertClass, actualClass, actual);
+        savedActual.set(actual);
 
-        public StringSoftAssertion(SoftAssertion softAssertion, String message, String actual) {
-            super(softAssertion, message, actual);
+        try {
+            STACK_WALKER.walk(s -> s.skip(walkStep).findFirst())
+                        .ifPresent(stackFrame -> logger.set(LoggerFactory.getLogger(stackFrame.getClassName())));
+        } catch (Exception ignore) {
         }
 
-        public StringSoftAssertion as(String message) {
-            this.innerMessage = message;
-            return this;
-        }
-
-        public StringSoftAssertion startWith(String prefix) {
-            softAssertion.assertTrue(actual.startsWith(prefix), innerMessage);
-            return this;
-        }
-
-        public StringSoftAssertion endsWith(String suffix) {
-            softAssertion.assertTrue(actual.endsWith(suffix), innerMessage);
-            return this;
-        }
-
-        public StringSoftAssertion contains(CharSequence s) {
-            softAssertion.assertTrue(actual.contains(s), innerMessage);
-            return this;
-        }
-
-        public StringSoftAssertion isEqualIgnoringCase(String expected) {
-            softAssertion.assertEquals(actual.toLowerCase(), expected.toLowerCase(), innerMessage);
-            return this;
-        }
-    }
-    
-    public static class NumberSoftAssertion<T extends Comparable<T>> extends BaseSoftAssertion<T> {
-
-        public NumberSoftAssertion(SoftAssertion softAssertion, String message, T actual) {
-            super(softAssertion, message, actual);
-        }
-        
-        public NumberSoftAssertion<T> as(String message) {
-            this.innerMessage = message;
-            return this;
-        }
-
-        public NumberSoftAssertion<T> isLargerThan(T expected) {
-            softAssertion.assertTrue(actual.compareTo(expected) > 0, innerMessage);
-            return this;
-        }
-
-        public NumberSoftAssertion<T> isLessThan(T expected) {
-            softAssertion.assertTrue(actual.compareTo(expected) < 0, innerMessage);
-            return this;
-        }
-    }
-    
-    public static class IterableSoftAssertion<T extends Iterable<?>> extends BaseSoftAssertion<T> {
-
-        public IterableSoftAssertion(SoftAssertion softAssertion, String message, T actual) {
-            super(softAssertion, message, actual);
-        }
-
-        public IterableSoftAssertion<T> as(String message) {
-            this.innerMessage = message;
-            return this;
-        }
-
-        public IterableSoftAssertion<T> isEqualNoOrder(T expected) {
-            doAssert(new SimpleAssert<>(actual, expected, innerMessage) {
-                @Override
-                public void doAssert() {
-                    final List<?> actualAsList = newArrayList(actual);
-                    final List<?> expectedAsList = newArrayList(expected);
-                    if (actualAsList == null || expectedAsList == null || actualAsList.size() != expectedAsList.size()) {
-                        failNoOrder(innerMessage, actual, expected);
-                        return;
-                    }
-
-                    for (Object item : actual) {
-                       if (item instanceof Iterable<?> || item.getClass().isArray()) {
-                           if (expectedAsList.stream().noneMatch(o -> isEqualNoOrder(item, o))) {
-                               failNoOrder(innerMessage, actual, expected);
-                               return;
-                           }
-                       } else {
-                           if (expectedAsList.stream().noneMatch(item::equals)) {
-                               failNoOrder(innerMessage, actual, expected);
-                               return;
-                           }
-                       }
-                    }
-                }
-            });
-            return this;
-        }
-    }
-    
-    public static class BaseSoftAssertion<T> {
-        
-        protected SoftAssertion softAssertion;
-
-        protected String innerMessage;
-        
-        T actual;
-
-        public BaseSoftAssertion(SoftAssertion softAssertion, String message, T actual) {
-            this.softAssertion = softAssertion;
-            this.innerMessage = message;
-            this.actual = actual;
-        }
-
-        public BaseSoftAssertion<T> as(String message) {
-            this.innerMessage = message;
-            return this;
-        }
-
-        public BaseSoftAssertion<T> isEqualTo(T expected) {
-            softAssertion.assertEquals(actual, expected, innerMessage);
-            return this;
-        }
-
-        public BaseSoftAssertion<T> isNotEqualTo(T expected) {
-            softAssertion.assertNotEquals(actual, expected, innerMessage);
-            return this;
-        }
-
-        protected boolean isEqualNoOrder(Object iterable, Object other) {
-            List<?> iterableAsList = newArrayList(iterable);
-            List<?> otherAsList = newArrayList(other);
-
-            if (iterableAsList == null || otherAsList == null || iterableAsList.size() != otherAsList.size()) {
-                return false;
-            }
-
-            for (Object item : iterableAsList) {
-                otherAsList.remove(item);
-            }
-            return otherAsList.isEmpty();
-        }
-
-        protected void doAssert(IAssert<?> assertCommand) {
-            softAssertion.onBeforeAssert(assertCommand);
-            try {
-                softAssertion.executeAssert(assertCommand);
-                softAssertion.onAssertSuccess(assertCommand);
-            } catch (AssertionError e) {
-                softAssertion.onAssertFailure(assertCommand, e);
-                throw e;
-            } finally {
-                softAssertion.onAfterAssert(assertCommand);
+        if (messages.get() != null) {
+            AssertionDescription description = messages.get();
+            if (description.getFormatter() != null) {
+                proxy.as(description.getFormatter(), description.getArgs());
+            } else if (description.getDescription() != null) {
+                proxy.as(description.getDescription());
+            } else if (description.getSupplier() != null) {
+                proxy.as(description.getSupplier());
             }
         }
+        return proxy;
+    }
 
-        protected <E extends Iterable<?>> void failNoOrder(String message, E actual, E expected) {
-            StringBuilder actualString = new StringBuilder();
-            actual.forEach(actualString::append);
-            StringBuilder expectedString = new StringBuilder();
-            expected.forEach(expectedString::append);
-            Assert.fail(message + " expected (no order) " + expectedString + " but found " + actualString);
+    @Override
+    public void succeeded() {
+        String message = "";
+        if (messages.get() != null) {
+            AssertionDescription description = messages.get();
+            if (description.getFormatter() != null) {
+                message = new TextDescription(description.getFormatter(), description.getArgs()).value();
+            } else if (description.getDescription() != null) {
+                message = description.getDescription().value();
+            } else if (description.getSupplier() != null) {
+                message = new LazyTextDescription(description.getSupplier()).value();
+            }
+            messages.remove();
         }
 
-        protected List<?> newArrayList(Object object) {
-            List<Object> list;
-            if (object == null) {
-                return null;
-            } else if (object.getClass().isArray()) {
-                list = new ArrayList<>(Arrays.asList((Object[]) object));
-            } else if (object instanceof Collection<?>) {
-                list = new ArrayList<>((Collection<?>) object);
-            } else if (object instanceof Iterable<?>) {
-                list = Streams.stream((Iterable<?>) object).collect(toCollection(ArrayList::new));
-            } else {
-                list = new ArrayList<>();
-                list.add(object);
-            }
-
-            return list;
+        if (savedActual.get() != null) {
+            String toString = savedActual.get().toString();
+            logPass("[" + message + "] " + toString);
+            savedActual.remove();
         }
     }
-    
-    private abstract static class SimpleAssert<T> implements IAssert<T> {
-        private final T actual;
-        private final T expected;
-        private final String message;
 
-        public SimpleAssert(String message) {
-            this(null, null, message);
+    @Override
+    public void onAssertionErrorCollected(AssertionError e) {
+        messages.remove();
+        savedActual.remove();
+        logFail(e.getMessage());
+    }
+
+    private void logPass(String message) {
+        message = message.trim().replaceAll("\\s+", " ");
+        getLogger().info("    {}PASS{}    {}", AnsiColor.GREEN_BOLD, AnsiColor.RESET, message);
+    }
+
+    private void logFail(String message) {
+        message = message.trim().replaceAll("\\s+", " ").replace("Expecting", "expected");
+        getLogger().info("    {}FAIL{}    {}", AnsiColor.RED_BOLD, AnsiColor.RESET, message);
+    }
+
+    private Logger getLogger() {
+        if (logger.get() != null) {
+            return logger.get();
+        } else {
+            return log;
         }
+    }
 
-        public SimpleAssert(T actual, T expected) {
-            this(actual, expected, null);
-        }
+    @Builder
+    @Getter
+    static class AssertionDescription {
+        private String formatter;
+        private Object[] args;
+        private Description description;
+        private Supplier<String> supplier;
+    }
 
-        public SimpleAssert(T actual, T expected, String message) {
-            this.actual = actual;
-            this.expected = expected;
-            this.message = message;
+    static class AssertionErrorCollectorDelegate implements AssertionErrorCollector {
+
+        private volatile boolean wasSuccess = true;
+        private List<AssertionError> collectedAssertionErrors = synchronizedList(new ArrayList<>());
+
+        @Override
+        public void collectAssertionError(AssertionError error) {
+            collectedAssertionErrors.add(error);
+            wasSuccess = false;
         }
 
         @Override
-        public String getMessage() {
-            return message;
+        public List<AssertionError> assertionErrorsCollected() {
+            List<AssertionError> errors = unmodifiableList(collectedAssertionErrors);
+            if (!errors.isEmpty()) {
+                collectedAssertionErrors = synchronizedList(new ArrayList<>());
+            }
+            return errors;
         }
 
         @Override
-        public T getActual() {
-            return actual;
+        public void succeeded() {
+            wasSuccess = true;
         }
 
         @Override
-        public T getExpected() {
-            return expected;
+        public boolean wasSuccess() {
+            return wasSuccess;
         }
-
-        @Override
-        public abstract void doAssert();
     }
 }
