@@ -1,5 +1,11 @@
 package com.java.code.twopointers;
 
+import com.java.code.common.BaseTest;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
+
+import java.util.Arrays;
+
 /**
  <p>Given an integer array <code>nums</code> sorted in <strong>non-decreasing order</strong>, remove the duplicates <a href="https://en.wikipedia.org/wiki/In-place_algorithm" target="_blank"><strong>in-place</strong></a> such that each unique element appears only <strong>once</strong>. The <strong>relative order</strong> of the elements should be kept the <strong>same</strong>. Then return <em>the number of unique elements in </em><code>nums</code>.</p>
 
@@ -58,27 +64,58 @@ package com.java.code.twopointers;
 
  <div><div>Related Topics</div><div><li>Array</li><li>Two Pointers</li></div></div><br><div><li>👍 13678</li><li>👎 17969</li></div>
  */
-public class RemoveDuplicatesFromSortedArray {
+public class RemoveDuplicatesFromSortedArray extends BaseTest {
+
+    @DataProvider
+    public Object[][] data() {
+        return new Object[][]{
+                {new int[]{1,1,2}, 2},
+                {new int[]{0,0,1,1,1,2,2,3,3,4}, 5},
+        };
+    }
+
+    @Test(dataProvider = "data")
+    public void test(int[] nums, int expected) {
+        softAssert.as("nums = %s", Arrays.toString(nums))
+                  .assertThat(removeDuplicates(nums))
+                  .isEqualTo(expected);
+    }
 
     public int removeDuplicates(int[] nums) {
-        int i = 0;
-        int j = 0;
-        int count = 0;
         int[] ans = new int[nums.length];
-        while (i < nums.length && j < nums.length) {
-            while (j < nums.length && nums[j] == nums[i]) {
+        int count = 0;
+        int j = -1;
+        for (int i = 0; i < nums.length; i++) {
+            if (j == -1 || ans[j] < nums[i]) {
+                ans[j + 1] = nums[i];
                 j++;
+                count++;
             }
-
-            ans[count] = nums[i];
-            i = j;
-            count++;
         }
-
-        for (int k = 0; k < count; k++) {
-            nums[k] = ans[k];
+        for (int i = 0; i < count; i++) {
+            nums[i] = ans[i];
         }
-
         return count;
+
+
+//        int i = 0;
+//        int j = 0;
+//        int count = 0;
+//        int[] ans = new int[nums.length];
+//        while (i < nums.length && j < nums.length) {
+//            while (j < nums.length && nums[j] == nums[i]) {
+//                j++;
+//            }
+//
+//            ans[count] = nums[i];
+//            i = j;
+//            count++;
+//        }
+//
+//        for (int k = 0; k < count; k++) {
+//            nums[k] = ans[k];
+//        }
+//
+//        return count;
     }
 }
