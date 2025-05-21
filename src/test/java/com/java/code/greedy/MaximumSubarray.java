@@ -9,7 +9,7 @@ import java.util.Arrays;
 /**
  <p>Given an integer array <code>nums</code>, find the <span data-keyword="subarray-nonempty">subarray</span> with the largest sum, and return <em>its sum</em>.</p>
 
- <p>&nbsp;</p> 
+ <p>&nbsp;</p>
  <p><strong class="example">Example 1:</strong></p>
 
  <pre>
@@ -34,48 +34,50 @@ import java.util.Arrays;
  <strong>Explanation:</strong> The subarray [5,4,-1,7,8] has the largest sum 23.
  </pre>
 
- <p>&nbsp;</p> 
+ <p>&nbsp;</p>
  <p><strong>Constraints:</strong></p>
 
- <ul> 
- <li><code>1 &lt;= nums.length &lt;= 10<sup>5</sup></code></li> 
- <li><code>-10<sup>4</sup> &lt;= nums[i] &lt;= 10<sup>4</sup></code></li> 
+ <ul>
+ <li><code>1 &lt;= nums .length &lt;= 10<sup>5</sup></code></li>
+ <li><code>-10<sup>4</sup> &lt;= nums[i] &lt;= 10<sup>4</sup></code></li>
  </ul>
 
- <p>&nbsp;</p> 
+ <p>&nbsp;</p>
  <p><strong>Follow up:</strong> If you have figured out the <code>O(n)</code> solution, try coding another solution using the <strong>divide and conquer</strong> approach, which is more subtle.</p>
 
- <div><div>Related Topics</div><div><li>Array</li><li>Divide and Conquer</li><li>Dynamic Programming</li></div></div><br><div><li>👍 35542</li><li>👎 1501</li></div>
+ <div><div>Related Topics</div><div><li>Array</li><li>Divide and Conquer</li><li>Dynamic Programming</li></div></div><br><div><li>👍 35529</li><li>👎 1500</li></div>
  */
 public class MaximumSubarray extends BaseTest {
 
     @DataProvider
     public Object[][] data() {
         return new Object[][]{
-                {new int[]{-2,1,-3,4,-1,2,1,-5,4}, 6},
-                {new int[]{1}, 1},
-                {new int[]{5,4,-1,7,8}, 23},
+                {new int[] {-2,1,-3,4,-1,2,1,-5,4}, 6},
+                {new int[] {1}, 1},
+                {new int[] {5,4,-1,7,8}, 23},
+                {new int[] {-1}, -1},
         };
     }
 
     @Test(dataProvider = "data")
     public void test(int[] nums, int expected) {
-        softAssert.as("nums = %s", Arrays.toString(nums))
+        softAssert.as(String.format("nums = %s", Arrays.toString(nums)))
                   .assertThat(maxSubArray(nums))
                   .isEqualTo(expected);
     }
 
     public int maxSubArray(int[] nums) {
-        int max = Integer.MIN_VALUE;
-        int sum = 0;
-        for (int i = 0; i < nums.length; i++) {
-            if (sum < 0) {
-                sum = nums[i];
-            } else {
-                sum += nums[i];
-            }
-            max = Math.max(max, sum);
+        return maxSubArray(nums, 0, 0);
+    }
+
+    public int maxSubArray(int[] nums, int index, int sum) {
+        if (index >= nums.length || index < 0) {
+            return Integer.MIN_VALUE;
+        } else {
+            int stop = sum + nums[index];
+            int noPick = maxSubArray(nums, index + 1, 0);
+            int downTheRoad = maxSubArray(nums, index + 1, stop);
+            return Math.max(stop, Math.max(noPick, downTheRoad));
         }
-        return max;
     }
 }

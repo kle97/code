@@ -35,7 +35,7 @@ import org.testng.annotations.Test;
  <p><strong>Constraints:</strong></p>
 
  <ul>
- <li>The input must be a <strong>binary string</strong> of .length <code>32</code></li>
+ <li>The input must be a <strong>binary string</strong> of length <code>32</code></li>
  </ul>
 
  <p>&nbsp;</p>
